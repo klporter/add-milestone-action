@@ -931,7 +931,7 @@ async function getCurrentMilestone() {
         owner: owner,
         repo: repo,
         state: 'open',
-        direction: 'desc'
+        direction: 'asc'
     });
     const currentMilestone = milestones[0];
     console.log(`Current milestone: ${currentMilestone.title}`)
