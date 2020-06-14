@@ -19,7 +19,8 @@
   "homepage": "https://github.com/salesforce-it/add-milestone-action#readme",
   "dependencies": {
     "@actions/core": "^1.2.4",
-    "@actions/github": "^3.0.0"
+    "@actions/github": "^3.0.0",
+    "request": "^2.88.2"
   },
   "devDependencies": {
     "request-promise": "^4.2.5"
