@@ -6923,9 +6923,15 @@ module.exports = isPlainObject;
 const core = __webpack_require__(872);
 const milestone = __webpack_require__(173);
 const issue = __webpack_require__(241);
+const githubContext = process.env.GITHUB_CONTEXT
+const repo = process.env.GITHUB_REPOSITORY
 
 try {
-    const currentMilestone = milestone.getCurrentMilestone();
+    console.log(`Repo: ${repo}`)
+    console.log(`Context: ${githubContext}`)
+    console.log(`Repository: ${githubContext.repository}`);
+    console.log(`Event: ${githubContext.event}`);
+    // const currentMilestone = milestone.getCurrentMilestone();
 } catch (error) {
     core.setFailed(error.message);
 }
@@ -7513,8 +7519,6 @@ const github = __webpack_require__(307);
  * Gets the milestone with the nearest 'dueOn'
  */
 function getCurrentMilestone() {
-    console.log(`Repository: ${github.context.repository}`);
-    console.log(`Event: ${github.context.event}`);
     // return rp(restConfig.buildRequest(`repos/${github.context.repository}/milestones?state=open&direction=desc`, 'GET'));
 }
 
