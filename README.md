@@ -12,4 +12,19 @@ This action adds the current milestone to any PR that is opened in the repositor
 
 ## Example usage
 
-uses: actions/add-milestone-action@v1
+name: Pull Request Milestone
+
+on:
+  pull_request:
+    types:
+      - opened
+
+jobs:
+  add_milestone:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add milestone action step
+        env:
+            GH_CONTEXT: ${{ toJson(github) }}
+        id: milestone
+        uses: klporter/add-milestone-action@v1
