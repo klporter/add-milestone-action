@@ -6,9 +6,10 @@ const githubContext = JSON.parse(process.env.GH_CONTEXT)
 try {
     console.log(`Repository: ${githubContext.repository}`);
     console.log('Getting current milestone')
-    const currentMilestone = milestone.getCurrentMilestone();
-    issue.updateIssueWithMilestone(currentMilestone[0])
-        .then(() => console.log("Finished adding milestone"))
+    milestone.getCurrentMilestone().then(currentMilestone => {
+        issue.updateIssueWithMilestone(currentMilestone)
+            .then(() => console.log("Finished adding milestone"))
+    });
 } catch (error) {
     core.setFailed(error.message);
 }

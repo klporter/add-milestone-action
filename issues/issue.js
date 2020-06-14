@@ -4,7 +4,7 @@ const octokit = github.getOctokit(githubContext.token)
 
 /**
  * Update an issue with the provided milestone
- * @param {number} milestone the number of the milestone to associate this issue with
+ * @param {string} milestone the number of the milestone to associate this issue with
  */
 async function updateIssueWithMilestone(milestone) {
     let issueNumber = githubContext.event.number;
