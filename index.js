@@ -6,6 +6,7 @@ const repo = process.env.GITHUB_REPOSITORY
 
 try {
     console.log(`Repo: ${repo}`)
+    console.log(`Context: ${githubContext}`)
     console.log(`Repository: ${githubContext.repository}`);
     console.log(`Event: ${githubContext.event}`);
     // const currentMilestone = milestone.getCurrentMilestone();
