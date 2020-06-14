@@ -895,7 +895,7 @@ try {
     console.log(`Repository: ${githubContext.repository}`);
     console.log('Getting current milestone')
     milestone.getCurrentMilestone().then(currentMilestone => {
-        issue.updateIssueWithMilestone(currentMilestone)
+        issue.updateIssueWithMilestone(currentMilestone.number)
             .then(() => console.log("Finished adding milestone"))
     });
 } catch (error) {
@@ -3452,19 +3452,19 @@ const github = __webpack_require__(208);
 const octokit = github.getOctokit(githubContext.token)
 
 /**
- * Update an issue with the provided milestone
- * @param {string} milestone the number of the milestone to associate this issue with
+ * Update an issue with the provided milestoneNumber
+ * @param {string} milestoneNumber the number of the milestoneNumber to associate this issue with
  */
-async function updateIssueWithMilestone(milestone) {
+async function updateIssueWithMilestone(milestoneNumber) {
     let issueNumber = githubContext.event.number;
-    console.log(`Adding milestone, ${milestone}, to pull request: ${issueNumber}`);
+    console.log(`Adding milestone, ${milestoneNumber}, to pull request: ${issueNumber}`);
     const owner = githubContext.repository.split('/')[0]
     const repo = githubContext.repository.split('/')[1]
     return await octokit.issues.update({
         owner: owner,
         repo: repo,
         issue_number: issueNumber,
-        milestone: milestone
+        milestone: milestoneNumber
     });
 }
 

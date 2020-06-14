@@ -7,7 +7,7 @@ try {
     console.log(`Repository: ${githubContext.repository}`);
     console.log('Getting current milestone')
     milestone.getCurrentMilestone().then(currentMilestone => {
-        issue.updateIssueWithMilestone(currentMilestone)
+        issue.updateIssueWithMilestone(currentMilestone.number)
             .then(() => console.log("Finished adding milestone"))
     });
 } catch (error) {
