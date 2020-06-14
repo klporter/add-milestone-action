@@ -1,5 +1,5 @@
 const rp = require('request-promise');
-const restConfig = require('../../rest/rest-config');
+const restConfig = require('../request/rest-config');
 const github = require('@actions/github');
 
 /**
