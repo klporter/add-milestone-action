@@ -7,6 +7,8 @@ try {
     console.log(`Repository: ${githubContext.repository}`);
     console.log('Getting current milestone')
     const currentMilestone = milestone.getCurrentMilestone();
+    issue.updateIssueWithMilestone(currentMilestone[0])
+        .then(() => console.log("Finished adding milestone"))
 } catch (error) {
     core.setFailed(error.message);
 }

@@ -6,11 +6,17 @@ const octokit = github.getOctokit(githubContext.token)
  * Update an issue with the provided milestone
  * @param {number} milestone the number of the milestone to associate this issue with
  */
-function updateIssueWithMilestone(milestone) {
-    console.log(`Milestone: ${milestone}`);
-    console.log(`Repository: ${github.context.repository}`);
-    console.log(`Event: ${github.context.event}`);
-    // return rp(restConfig.buildRequest(`repos/${github.context.repository}/issues/${pr_number}`, 'PATCH', restBody));
+async function updateIssueWithMilestone(milestone) {
+    let issueNumber = githubContext.event.number;
+    console.log(`Adding milestone, ${milestone}, to pull request: ${issueNumber}`);
+    const owner = githubContext.repository.split('/')[0]
+    const repo = githubContext.repository.split('/')[1]
+    return await octokit.issues.update({
+        owner: owner,
+        repo: repo,
+        issue_number: issueNumber,
+        milestone: milestone
+    });
 }
 
 module.exports = {updateIssueWithMilestone}

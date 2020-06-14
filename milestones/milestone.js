@@ -8,14 +8,15 @@ const octokit = github.getOctokit(githubContext.token)
 async function getCurrentMilestone() {
     const owner = githubContext.repository.split('/')[0]
     const repo = githubContext.repository.split('/')[1]
-    const { data: milestones } = await octokit.issues.listMilestones({
+    const {data: milestones} = await octokit.issues.listMilestones({
         owner: owner,
         repo: repo,
         state: 'open',
         direction: 'desc'
     });
-
-    console.log(milestones)
+    const currentMilestone = milestones[0];
+    console.log(`Current milestone: ${currentMilestone.title}`)
+    return currentMilestone;
 }
 
 module.exports = {getCurrentMilestone}

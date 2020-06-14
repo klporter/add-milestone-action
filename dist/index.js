@@ -895,6 +895,8 @@ try {
     console.log(`Repository: ${githubContext.repository}`);
     console.log('Getting current milestone')
     const currentMilestone = milestone.getCurrentMilestone();
+    issue.updateIssueWithMilestone(currentMilestone[0])
+        .then(() => console.log("Finished adding milestone"))
 } catch (error) {
     core.setFailed(error.message);
 }
@@ -924,14 +926,15 @@ const octokit = github.getOctokit(githubContext.token)
 async function getCurrentMilestone() {
     const owner = githubContext.repository.split('/')[0]
     const repo = githubContext.repository.split('/')[1]
-    const { data: milestones } = await octokit.issues.listMilestones({
+    const {data: milestones} = await octokit.issues.listMilestones({
         owner: owner,
         repo: repo,
         state: 'open',
         direction: 'desc'
     });
-
-    console.log(milestones)
+    const currentMilestone = milestones[0];
+    console.log(`Current milestone: ${currentMilestone.title}`)
+    return currentMilestone;
 }
 
 module.exports = {getCurrentMilestone}
@@ -3451,11 +3454,17 @@ const octokit = github.getOctokit(githubContext.token)
  * Update an issue with the provided milestone
  * @param {number} milestone the number of the milestone to associate this issue with
  */
-function updateIssueWithMilestone(milestone) {
-    console.log(`Milestone: ${milestone}`);
-    console.log(`Repository: ${github.context.repository}`);
-    console.log(`Event: ${github.context.event}`);
-    // return rp(restConfig.buildRequest(`repos/${github.context.repository}/issues/${pr_number}`, 'PATCH', restBody));
+async function updateIssueWithMilestone(milestone) {
+    let issueNumber = githubContext.event.number;
+    console.log(`Adding milestone, ${milestone}, to pull request: ${issueNumber}`);
+    const owner = githubContext.repository.split('/')[0]
+    const repo = githubContext.repository.split('/')[1]
+    return await octokit.issues.update({
+        owner: owner,
+        repo: repo,
+        issue_number: issueNumber,
+        milestone: milestone
+    });
 }
 
 module.exports = {updateIssueWithMilestone}
