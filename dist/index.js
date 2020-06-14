@@ -6923,7 +6923,7 @@ module.exports = isPlainObject;
 const core = __webpack_require__(872);
 const milestone = __webpack_require__(173);
 const issue = __webpack_require__(241);
-const githubContext = process.env.GH_CONTEXT
+const githubContext = JSON.parse(process.env.GH_CONTEXT)
 const repo = process.env.GITHUB_REPOSITORY
 
 try {
