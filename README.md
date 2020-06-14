@@ -11,7 +11,7 @@ This action adds the current milestone to any PR that is opened in the repositor
 ### none
 
 ## Example usage
-
+```yml
 name: Pull Request Milestone
 
 on:
@@ -28,3 +28,4 @@ jobs:
             GH_CONTEXT: ${{ toJson(github) }}
         id: milestone
         uses: klporter/add-milestone-action@v1
+```
