@@ -2,4 +2,4 @@ name: 'Add Current Milestone'
 description: 'Add the current milestone to any PR that is opened in the repository'
 runs:
   using: 'node12'
-  main: 'index.js'
+  main: 'dist/index.js'
